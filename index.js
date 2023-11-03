@@ -8,7 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 app.use(
   cors({
-    origin: ["http://localhost:5174"],
+    origin: ["http://localhost:5174", "http://localhost:5173"],
     credentials: true,
   })
 );
@@ -128,7 +128,8 @@ async function run() {
         const result = await orderCollection.find(email).toArray();
         res.status(200).send(result);
       } catch (error) {
-        res.status(500).send("Server Internal Error", error);
+        console.error("errrrrrrrr", error.message);
+        res.status(500).send("Server Internal Error: " + error.message);
       }
     });
 
